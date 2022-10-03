@@ -1,0 +1,10 @@
+l	Linux									Windows
+
+1. Linux is a open source operating system.				While windows are the not the open source operating system.
+2. Linux is free of cost.						While it is costly.
+3. It’s file name case-sensitive.					While it’s file name is case-insensitive.
+4. In linux, monolithic kernel is used.					While in this, micro kernel is used.
+5. Linux is more efficient in comparison of windows.			While windows are less efficient.
+6. There is forward slash is used for Separating the directories.	While there is back slash is used for Separating the directories.
+7. Linux provides more security than windows.				While it provides less security than linux.
+8. Linux is widely used in hacking purpose based systems.		While windows does not provide much efficiency in hacking.

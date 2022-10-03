@@ -1,0 +1,74 @@
+				helm commands
+
+helm create application			(application= give name of your appln)
+		
+
+			first go in the directory containg your appln
+
+helm install chart-1 .				(chart-1 = name u want to give)(to create the chart)
+helm install chart-2 . -f new-values.yaml 	(new-values.yaml= name of your value-file)(to run multiple values.yaml file)
+helm install name . --set service.type=NodePort (to change service type)
+helm list 					(to get list of all your chart running)
+kubectl get nodes -o wide			(to get ip-address & view in browser)
+helm uninstall chart-1				(chart-1 = name of chart you want to delete) (to delete a chart)
+helm upgrade chart-name	folder			(to upgrade chart)
+helm package name-of-folder			(to create a package)
+helm plugin install url-of-repo			(to install plugin)
+helm lint 					(to find errors)
+helm template .					(to get the template before deployment)
+helm template . | kubectl apply -f -		(another way to find errors)
+helm install --dry-run --debug			(to check the code before running)
+source <(helm completion terminal-name)		(to autocomplete command)
+{{.release.name}}				(to get the release name in project (i.e. the name of project)) 
+	
+https://chartmuseum.com/docs/
+
+
+					Dependency command
+helm dep build (name of file/folder)
+helm dep list (name of file/folder)
+helm dep update (name of file/folder)
+
+
+
+
+
+
+first change the label & selector in (depl & service file)to any name you want to give (eg=app: nginx)
+
+values-> service->type->nodeport->nodeport:(port)->externalTrafficPolicy: Local:(comment-out)
+
+			(to install chartmuseum)
+
+helm repo add chartmuseum https://chartmuseum.github.io/charts
+helm install chartmuseum/chartmuseum
+helm pull chartmuseum/chartmuseum
+tar -xvf name-of-file
+curl --data-binary "name-of-file" ip-address/api/charts
+
+helm pull
+helm repo list					 	(to check the repository)
+helm repo add name ip 					(name you want to give	,ip of your chart: http://localhost:8080/)
+helm repo update				 	(to update repo)
+helm repo remove name-of-repo
+helm search repo
+
+					HelmFile
+
+https://jhooq.com/helmfile-manage-helmchart/ 			(All steps are written here)
+https://www.youtube.com/watch?v=r9KePPg0KQY&t=35s		(link to the video for steps)
+
+		(the below steps can be copied as it is on gcp terminal or linux-bash) (create a folder and execute blw cmd)
+wget https://github.com/roboll/helmfile/releases/download/v0.142.0/helmfile_linux_amd64      (select-os-and-copy-linkaddress)
+mv helmfile_linux_amd64 helmfile
+chmod 777 helmfile
+sudo mv helmfile /usr/local/bin
+helmfile --version
+
+
+
+
+
+
+ 
+					

@@ -1,0 +1,148 @@
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+to check pv kubectl df-pv cmd 					https://github.com/yashbhutwala/kubectl-df-pv
+
+in windows use findstr instead of grep 
+
+kubectl apply -f (filename=(client-node-port.yaml)                              
+kubectl get pods 						(status of the running pods)
+kubectl get services						(status of the network services)
+kubectl get all							(status of all running services)
+kubectl get rs							(status of the running replicaset)
+kubectl get configmap -n (name-of-namespace)			(status of all namespace)
+kubectl describre <objecttype=pod> <objectname>			(to get detailed info) (objecttype=confile->kind=pod,service) (objectname-confile->metadata->name:'')
+kubectl delete -f <confilename>					(to delete a pod/object) (confilename=client-pod.yaml)
+kubectl logs (pod-name)						(to get logs)
+kubectl describe pod (pod-name)					(gives additional info about the pod)
+kubectl describe pod (pod-name) | grep -i image			(gives the image-name (image-use)
+kubectl get deploy -n microsec-system -o yaml|grep <expression> (to find inside the yaml-file)
+kubectl exec -it (pod-name) --bin/bash				(gives the command line inside the pod(container))
+kubectl get events 						(gives the list of all things (pod-creation everything))
+kubectl scale rs new-replica-set --replicas=5                   (to scale replicas)
+kubectl get pod -n microsec-system -o wide			(to get the ip of the pod)
+
+kubectl get pod <pod-name> -o yaml > pod-definition.yaml        (you can use this to create yaml file )
+kubectl run redis --image=redis123 --dry-run=client -o yaml > pod.yaml   (you can use this to create yaml file )
+(--dry-run=client flag to preview the object that would be sent to your cluster, without really submitting it.)
+
+# Create a deployment named my-dep that runs the busybox image and expose port 5701.
+  kubectl create deployment my-dep --image=busybox --port=5701
+
+# Create a deployment named my-dep that runs the busybox image and expose port 5701.
+  kubectl create deployment my-dep --image=busybox --port=5701
+
+				This command can be used in gcp terminal
+kubectl create deployments (givenametodeploy) image             (to create a deployment)
+kubectl edit deployments (givenametodeploy)			(to edit deployment)
+kubectl create namespace (name-you-give)			(to create namespace)
+kubectl get pod -o wide						(gives enlarge o/p)
+kubectl get ns 							(to get namespace)
+kubectl get pods --all-namespaces | grep (pod-you-want-find)    (imp-cmd to find pod in all ns)
+kubectl config current-context					(to get in which cluster you are)
+kubectl rollout history deploy <deploymentname> -n <namespace>  		(to get all version of previous deployment)
+
+kubectl rollout undo deploy <deploymentname> -n <namespace> --to-revision=2  	(to rollback to previous version)
+
+kubectl get node -o wide							(to get the info of os on which cluster is running)
+										(to get info of on what node pod is running)
+
+
+ 
+						minikube command
+minikube status
+minikube start 
+minikube dashboard
+
+
+						Ingress setup Docker Desktop
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/cloud/deploy.yaml
+minikube addons enable ingress     	(to enable ingress on minikube locally) (after this use this cmd -> kubectl get pod -n kube-system)
+
+
+						kubernetus setup (commands in gcp cli)
+
+gcloud config set project multi-k8s-332408				(project = id(written in id column)
+gcloud config set compute/zone us-central1-c
+gcloud container clusters get-credentials multi-cluster			(credentials =(cluster name)
+
+						Helm setup
+
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+
+						 Install Ingress-Nginx:
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm install my-release ingress-nginx/ingress-nginx
+
+						To encrypt text (linux-Vbox)
+echo -n 'text' | base64								(text=username or password)
+
+					vault usealing cmd
+
+kubectl port-forward svc/vault -n microsec-system 8200:8200
+kubectl get secrets vault -n microsec-system -o yaml  
+
+export kubeconfig=/c/Users/piyus/Desktop/microsec-system/dev-kubeconfig.txt
+export kubeconfig=/c/Users/piyus/Downloads/kuber-config/qa_kube_config.txt
+export kubeconfig=C:\Users\piyus\Downloads\kuber-config\dev-kubeconfig.txt
+
+ helm upgrade --install kubernetes-manager  -f charts/dev-values.yaml ./charts -n microsec-system
+
+ helm install common-submitter -f charts/dev-values.yaml ./charts -n microsec-system
+
+helm list -n microsec-system | grep microsec-aud
+
+ helm uninstall kubernetes-manager -n microsec-system
+
+helm template -f charts/dev-values.yaml aethia charts/ > aethia.yaml
+kubectl-slice -f aethia.yaml  -o ./aethia
+
+awk 'NR>1' aethia/deployment-aethia.yaml | sed '/^$/d' > aethia/deployment-aethia-new.yaml && mv aethia/deployment-aethia-new.yaml aethia/deployment-aethia.yaml
+
+awk 'NR>1' aethia/service-aethia.yaml | sed '/^$/d' > aethia/service-aethia-new.yaml && mv aethia/service-aethia-new.yaml aethia/deployment-service.yaml
+
+kubectl get deploy -n microsec-system aethia -o yaml | yq eval 'del(.metadata.managedFields)' | \                                                
+yq eval 'del(.status)' | \
+yq eval 'del(.metadata.creationTimestamp)' |  \
+yq eval 'del(.metadata.generation)'  | \
+yq eval 'del(.metadata.resourceVersion)'| \
+yq eval 'del(.metadata.uid)' | \
+yq eval 'del(.metadata.annotations)' | \
+yq eval 'del(.spec.schedulerName)' | \
+yq eval 'del(.spec.terminationGracePeriodSeconds)' | \
+yq eval 'del(.spec.template.metadata.creationTimestamp)'|\
+yq eval 'del(.metadata.labels."app.kubernetes.io/managed-by")' > source.dep.yaml
+
+kubectl get svc -n microsec-system aethia -o yaml | \
+yq eval 'del(.metadata.annotations)' | \
+yq eval 'del(.metadata.creationTimestamp)' | \
+yq eval 'del(.metadata.generation)' | \
+yq eval 'del(.metadata.resourceVersion)' | \
+yq eval 'del(.metadata.uid)' | \
+yq eval 'del(.metadata.managedFields)' | \
+yq eval 'del(.spec.clusterIP)' | \
+yq eval 'del(.spec.clusterIPs)'  > source-svc.yaml
+
+diff -u source-dep.yaml aethia/deployment-aethia.yaml
+
+fbf8f01f2058f756db0bda68fe9a4f1f20ccab4e9b27751c93dbf039cbe2d064c4;
+baa778a0057ad56051317ffce3750ea0f388bf4177dda1fb222a336412c7dfb7b4;
+37253177354c564c7ce826e82380e4171e1e29b664b4363644cbbdf8597963a6bc;
+b1a92a6d259fb942c6ba9a3dcabdc6dd3a673cd19fccca881a43dec39b53034b0d;
+ad50ee00a12be22494279fac134218d38edb45c4857e9f6c3b4a8c
+
+kubectl cp -n jenkins jenkins-5694f8bcc8-g7qct:/var/jenkins_home/ .
+	 namespace:pod-name 
+
+alias kgp='kubectl get pod'
+alias kdp='kubectl describe pod'
+alias kgd='kubectl get deployment'
+alias ked='kubectl edit deployment'
+alias kl='kubectl logs'
+kubectl config set-context $(kubectl config current-context) --namespace=microsec-system
+
+https://signoz.io/blog/kubectl-top/
+kubectl top node						very imp cmd for monitoring(how much cpu used memory used)
+
+
+

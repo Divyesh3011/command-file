@@ -1,0 +1,151 @@
+Resource type: Deployment
+
+Deployment:
+	name			: demo
+	replicas		: 3
+	Revision history limit	: 15
+	progre deadline sec	: keep default (don't enter anything)
+	pod ter			: keep default (don't enter anything)
+
+labels:  (add label)
+	name 			: app
+	value			: web
+	name 			: version
+	value			: v1
+
+containers: (edit existing container)
+
+	name   			: nginx                  (give the nameyou want)
+	image  			: nginx:1.21           (choose the image you want)
+	ports:
+	  - name 		: http
+	  - port 		: 80
+	  - protocol 		: TCP
+	  - name 		: https
+	  - port 		: 443
+	  - protocol 		: TCP
+	cpu request limit :
+	  - CPU requests 	: 100m
+	  - cpu limit    	: 1
+ 	Memory Requests and Limits 
+	  - Memory Requests 	: 128Mi
+	  - Memory Limit    	: 1Gi
+	Environment Variables (add env variable)
+	  - Name		: PORT
+	  - value        	: 443
+	  - Name		: HTTP_PORT
+	  - value        	: 80
+	  - Name		: VERSION
+	  - value        	: v1
+	Liveness Probe
+	  - Failure Threshold   : 5
+	  - Timeout		: 60
+	  - Initial Delay	: 120
+	  - Period		: 10
+	  - Liveness Probe Type	: 
+		- liveli prob ty: HttpGet (if you are working with "restful" service choose "http" for grtc choose "command" for "microservice" any one "http or command")
+		- Host		: localhost
+		- path		: /health
+		- scheme	: HTTP
+		- port		: 80
+	 -  Readinese Probe Type:
+		- Success threshold : 1
+		- failure threshold : 5
+		- Timeout	    : 60
+		- Initial Delay	    : 30
+		- Period	    : 10
+		- readines Probe Type:
+		    - readiness prob ty : HttpGet
+		    - Host		: localhost
+		    - path		: /health
+		    - scheme	        : HTTP
+		    - port              : 80
+
+		
+
+pod affinity / Anti affintity : (remove the selected rule and don't select anything keep default)
+
+(this step is only for private image (repository) at the end of the yaml file write below line but do proper "indententions")
+
+imagePullSecrets:
+  - name : regcred (name of secret you can give anything to create secret watch below link from 22min)
+
+the command to create secret
+kubectl create secret docker-registry regcred --docker-server=<your-registry-server> --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email>
+
+
+link = https://drive.google.com/file/d/1gyz20k-8eE1hzIt7GR9v0hIRB8U0syX_/view
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo
+  labels:
+    app: web
+    version: v1
+spec:
+  selector:
+    matchLabels:
+      octopusexport: OctopusExport
+  revisionHistoryLimit: 15
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: web
+        version: v1
+        octopusexport: OctopusExport
+    spec:
+      hostNetwork: false
+      containers:
+        - name: nginx
+          image: 'nginx:1.21'
+          ports:
+            - name: https
+              containerPort: 443
+              protocol: TCP
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          env:
+            - name: VERSION
+              value: v1
+            - name: HTTP_PORT
+              value: '80'
+            - name: PORT
+              value: '443'
+          resources:
+            requests:
+              memory: 128Mi
+              cpu: 100m
+            limits:
+              memory: 1Gi
+              cpu: '1'
+          livenessProbe:
+            failureThreshold: 5
+            initialDelaySeconds: 120
+            periodSeconds: 10
+            timeoutSeconds: 60
+            httpGet:
+              host: localhost
+              path: /health
+              port: 80
+              scheme: HTTP
+          readinessProbe:
+            failureThreshold: 5
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 60
+            httpGet:
+              host: localhost
+              path: /health
+              port: 80
+              scheme: HTTP
+
+
+
+

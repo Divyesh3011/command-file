@@ -1,0 +1,27 @@
+createcontainererro - 	describe pod
+imagepullback		jenkins image tag
+crashloop	    -   look at logs
+OOMKilled 	    -	cpu/resources 
+
+upstream connect error or disconnect/reset before headers. reset reason: connection failure, transport failure reason: delayed connect error: 111           check svc file & deploy for port and labels
+
+Error: failed to create containerd task: OCI runtime create failed: container_linux.go:380 :  error related to docker
+
+microsec-frontend,backend , jenkins , keycloak ,
+
+if unable to import cloud - (check log of vault and agent manager (if sealed than unsealed using microsec doc ) )
+database classification report - dlp api ,class submit
+visiblity - kiali,ui
+policy engine - policy engine
+
+
+jenkins error check
+
+401 unauthorized = error due to credentials (check your credentials)
+
+host key verification fail = add this to pipelinescript (StrictHostKeyChecking=no)
+
+appln.war file permission denied error = change root permission of .war file 
+	sudo chmod -R 777 webapps (the name of directory in which the war file is)
+
+ERROR: script returned exit code 127 = standard error code for cmd not found

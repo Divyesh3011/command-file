@@ -1,0 +1,37 @@
+#ssh into ec2 on linux os
+chmod 400 (pemfilename.pem)
+use ec2 connect then click ssh and copy ssh -i 'whole line and paste'
+ 
+# create a key pair using ec2
+aws ec2 create-key-pair --key-name MyKeyPair --query 'KeyMaterial' --output text > MyKeyPair.pem
+
+
+# creating an ec2 instances
+aws ec2 run-instances --image-id ami-0a23ccb2cdd9286bb --count 1 --instance-type t2.micro --key-name newkeypair --security-group-ids sg-903004f8 --subnet-id subnet-6e7f829e
+
+
+# code to launch apachae server using cli.
+sudo su
+yum install httpd
+systemctl enable httpd
+systemctl start httpd
+echo "hello world" > /var/www/html/index.html
+
+
+# code to ssh into private instance from public instance
+
+# public instance
+ssh -i pemfile-path\name.pem ec2-user@ip
+
+# private instance
+ssh ec2-user@private-ip -i pemfilename.pem
+
+
+# command to run a project on s3
+sudo su
+yum update -y
+yum install httpd -y
+chkconfig httpd on
+cd /var/www/html
+aws s3 sync s3://demo-velocity-project /var/www/html
+service httpd start

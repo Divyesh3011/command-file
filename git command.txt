@@ -1,0 +1,38 @@
+ # the commands to put your local file (work) to github.
+
+git status       imp cmd
+
+-use the commands that show when you create reposistory
+for eg but use repository command if error refer this file
+
+echo "# docker-react" >> README.md
+git init        (if it shows reinitialized use this command - (rm -rf .git) then again (git init)
+git add .	(if you want to copy the local files to git reposistory)
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/divyeshbhalekar/docker-react.git
+git push -u origin main
+
+git log --oneline    		(to get log of all the changes)
+git branch (branch-name)	(to create a new branch)
+git branch 			(to view how many branch you have)
+		# permission denied error while push use this commands
+
+go to setting-developer-personal access token-generate token- and give all permission tik.
+go to the reposistory on which you want to upload file  
+and the copy https url eg - https://github.com/divyeshbhalekar/docker-react.git
+
+git remote set-url origin https url & paste the token
+
+in the terminal paste this command 
+git remote set-url origin https://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@github.com/divyeshbhalekar/docker-react.git
+                                    this is token generated
+
+ 
+			# IF you made changes to file re-upload commands
+git add .
+git commit -m "file name"
+git push -u origin main 		(since "main" is your default branch if different branch same cmd in main write branch name)
+
+git checkout -b "branchname"                (to add a new branch and switch to that branch )
+git checkout "branchname"		    (to switch from one branch to another)

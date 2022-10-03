@@ -1,0 +1,62 @@
+		linux commands
+uname 				- 	machine name
+uptime				- 	how much time the machine is operating
+whoami 				- 	gives name of user
+wheris 				- 	gives the path (eg - whereis python -gives the path where python is stored)
+w 				- 	gives no of users using the computer 
+man (name) 			- 	gives mannual of everything you want
+history				-	gives history of all commands use
+date 				- 	gives date and time 
+cal 				- 	gives calendar
+cd 				- 	change directory
+pwd				- 	present working directory
+cd .. 				- 	goes one directory(folder back)
+mkdir 				- 	makes directory (folder) (you can create how many folder you want just (mkdir new1 new2 new3)
+rm 				- 	remove directory/delete file
+rm -r				- 	remove directory recursively  (if there are files present-use this cmd)
+ls 				- 	list all the files in the directory
+ls -l 				- 	gives enlarge list of all files in the directory
+touch (filename)		-	creates a new file()
+cat (filename)			-	gives what inside the file
+tail (filename)			-	gives  what inside the file(minimum 10 lines)
+head (filename)			- 	gives  what inside the file(minimum 10 lines)
+cp				-    	copy a file
+mv				- 	move a file
+clear				-	clear screen
+version				-	cat /etc/os-release
+diff				- 	compare content of files
+echo				- 	to print something on screen  	(echo hello world)
+exit				- 	to exit
+mem				- 	to free disk space
+ps-x				- 	list of running task
+kill				-	To kill a task
+export var=value		- 	TO set environment variable
+chmod				-	To change permissions
+cron				-	to execute schedule command
+ping				-	to send icmp ECHO_REQUEST to network hosts 	(ping google.com)
+nslookup			-	To query Internet name servers interactively. 
+
+
+mkdir -p /divyesh/ddb/bhalekar   -      this create divyesh dir and then ddb and bhalekar in one command
+rm -r /tmp/my_files		 -      this remove dir and its content
+cp -r /divyesh /tmp/my_files	 -      this copy all content from /tmp/ to /divyesh dir
+cp new-file.txt new2-file.txt	 - 	this copy frome 1file to 2nd
+
+
+			
+		vim editors
+vim (filename)			- 	ctrl+i (to insert anything or write) 
+					to exit out of file (Esckey + enter + :wq (write(make changes)q(for quit))
+		nano editors
+nano (filename)			- 	to write directly write
+					to exit (ctrl+o + enter + ctrl+x(exit))
+ 		Ec2 instance
+Sudo su (root account you can do anything)
+yum update -y (updates all without asking (y-yes))
+systemctl start httpd.service (starts httpd service)
+systemctl enable httpd.service (enables across rebots)
+
+right click + ctrl+f (to make fullscreen in ubuntu)
+ 
+
+ 

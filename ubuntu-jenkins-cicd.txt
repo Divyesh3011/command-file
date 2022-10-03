@@ -1,0 +1,32 @@
+ubuntu free tier machnie
+
+// To install jenkins on Ubuntu free tier machine
+
+sudo apt update
+sudo apt install openjdk-8-jdk -y
+sudo wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
+sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+sudo apt update
+sudo apt install jenkins
+sudo systemctl status jenkins
+
+// To install docker on Ubuntu free tier machine (to access docker you need to install docker on jenkins)
+
+sudo apt install docker.io -y
+
+// add jenkins user to docker
+
+sudo usermod -aG docker jenkins
+
+// Restart jenkins 
+sudo systemctl restart jenkins
+
+//Plugins used in jenkins 
+
+sshAgent
+
+############################################# Deployment on docker steps (on docker manchine) #####
+
+sudo apt update
+sudo apt install docker.io -y        (to install docker)
+sudo usermod -aG docker ubuntu

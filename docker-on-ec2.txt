@@ -1,0 +1,27 @@
+To install docker on ec2 
+yum install docker -y 
+service docker start
+docker pull (image-name)		(you can get any image from docker hub)
+docker run -d --name () -p 8090:8080 (image-name)	(-d to run in detach mode)
+useradd dockeradmin
+passwd dockeradmin
+cat /etc/group
+usermod -aG docker dockeradmin
+id dockeradmin 
+
+
+
+
+to launch tomcat server		https://www.youtube.com/watch?v=DzLhABPzI90
+
+wget (get the latest tar.gz)		 (copy the link address of latest tomcat server)
+tar -zvxf (file-name)
+yum install java -y 
+cd /root/apache-tomcat-9.0.58/bin
+./ startup.sh				(to start the tomcat server (u need to be in bin folder))
+./ shutdown.sh				(to stop the tomcat server (u need to be in bin folder))
+										
+sudo ln -s /root/apache-tomcat-9.0.58/bin/startup.sh /usr/bin/tomcatup			(by this cmd u can run "tomcatup" from any folder)
+sudo ln -s /root/apache-tomcat-9.0.58/bin/shutdown.sh /usr/bin/tomcatdown
+
+

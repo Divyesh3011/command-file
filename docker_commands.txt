@@ -1,0 +1,79 @@
+fibonnachi app - refer to 112 & 114 appl'n architecture (you will understand the flow of appl'n & also the diagram )
+
+Docker command shortcut vs-code == create Dockerfile and ctrl+space (on every line of code)
+
+
+			Docker commands				id-id of container   
+
+docker build .
+docker run hello-world 			  (hello-world - image-name) 
+docker run busybox echo hi there	  (overide default cmd- of image)
+docker ps 				  (list of all running containers)
+docker ps --all 			  (list of all containers)
+docker create hello-world 		  (hello-world - container name) # this creates an id 
+docker start -a id   			  (id-created from docker create) (-a - gives the o/p if -a is not there no o/p is shown
+docker start -a id                        (to restart an exited container)
+docker logs id 				  (to get what inside the contaner logs)
+docker rm (container-name)		  (to remove docker container)
+docker stop id 				  (to stop the container)
+docker kill id				  (it kills the running container immediately)
+docker system prune                       (to delete all the container that are running)  (imp cmd if you are not using docker for a while )
+docker system prune -a --volumes --force
+docker run -d --name () -p 8090:8080 (image-name)	(-d to run in detach mode)
+		
+
+			Run Redis on Docker
+docker run redis 			  (open a new cli tab and type)
+docker exec -it id (command- redis-cli)   (this command help to run a command inside a running container)
+
+docker exec -it (container-id) sh	  (to start a command prompt in container this command you are going to use mostly)
+docker run -it (imagename) sh		 (to get the cmd)
+
+
+				Docker image
+mkdir (make a new folder)
+cd    (new made folder ) (enter code .   - to open vs code and then code in it )
+docker build .
+docker build -t (Docker-id)/(project-name):version .     (to tag the image with name rather than using id)
+docker run -t (Docker-id)/(project-name) 
+docker run -p	 8080        :    8080               demodockeracc/simpleweb 
+	      < route incoming      < the port inside    <image id>
+	      request to port      the container >
+	      on localhost >	
+
+			Run Nodejs app
+mkdir
+cd 
+docker build .						(to run any container)
+docker run -t (Docker-id)/(project-name)    		(to tag the project instead of using id we can use (Docker-id)/(project-name))
+docker run -p 8080:8080 (Docker-id)/(project-name)	(to connect using localhost we con use any port instead of port 8080 (left-side))(-p port)
+
+
+				Docker compose commands
+									
+docker compose up 									(to start multiple container at the same time)
+docker compose up --build						(if you make changes to file than you need to use this command)
+docker compose up -d 							(to start multiple container at the same time but in background)
+docker compose down 							(to stop multiple container at the same time)
+
+
+docker exec -it (containerid) npm run test 				(to run a test on app.test)
+					
+
+				Volume cmd -(are useful to detect automatic changes in app.js)
+
+docker build .                  (after you build the app and you made change use the below cmd)
+docker run -p 80:80 -v /app/node_modules -v $(pwd):/app imageid     		(this cmd is not useful in windows cmd&powrshell use gitbash)
+
+				
+				Dockerfile Development environment
+
+docker build (file-name(Dockerfile.dev) .                           (development-env cmd)                 
+
+
+				React & Node error
+
+If you are working with react project and you get 404 error change the node alpine version 16 or any other version
+& while running use docker run -it -p 3000:3000 container id
+
+mongodb port: 27017

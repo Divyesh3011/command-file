@@ -1,0 +1,65 @@
+steps for cicd pipeline 
+
+# gitlab - steps 
+
+1. create a new project -> select as private  -> initialize repository as README
+
+2. Go to Members section
+  - under invite member 
+  - gitlab member -> enter name of project members
+  - role permission -> select Developer -> and invite
+
+3. go to settings 
+  - under general settings
+  - select merge requests -> uncheck "enable Delete source branch"
+
+4. under Repository section -> select protected branch
+   - in branch "Allowed to merge" -> select Developers + Manintainers -> in Allowed to push -> select "Maintainers"
+
+5. under webhooks section
+   - url -> paste the jenkins url
+
+
+
+# jenkins Steps
+
+
+1. create a new item -> "give your project name" -> under copy from -> type the name of project that you want to copy configuration. 
+						 -> or select freestyle project
+
+2. inside jenkins home page -> Manage jenkins -> configure syst
+       - publish over ssh -> ssh servers -> go to the bottom and select add
+       	                                   - Name -> project name
+					   - Hostname -> ip of your instance
+					   - username -> ubuntu -> RD -> keep as it is
+
+3.  Inside project -> select configure
+   - under configure -> scm -> git -> repo url -> "copy paste the git ssh url "
+   - under configure -> Build triggre -> check -> "Build when a change is pushed"
+   - under configure -> Build env -> check -> "Delete works before ..."
+   - under configure -> Build -> Execute shell -> 
+		        command change -> nohup python3 python_script1.py -(instead of python_script1 write main file name)(rest keep same)
+   
+   - under configure -> post Build -> Project Recipient List -> email id of project worker
+   - under configure -> post Build -> send build artificats over ssh
+   				     - ssh server -> name -> select name of instance you added i step 2.
+				     - ssh server -> remote dir -> name of dir or name of proj (u can wite anything)
+				     - ssh server -> exec comnd -> change name of proj with your project name
+								(eg - my proj name is demo_python so replace demo_python with your proj name)
+4. save and apply.
+
+
+# winscp steps
+
+if you find permission denied error for creating folder use this cmd (sudo chmod -R 777 (folder or path)) 
+
+1. go to root folder (next step should be done only if you don't find specified folder)
+
+2. inside var -> create "www" folder -> create "project name" folder inside "www". (through cmd)
+
+3. then push code again
+
+4.to launch apache2 serveer
+   - sudo apt update
+   - sudo apt install apache2
+   - apache2 -version
