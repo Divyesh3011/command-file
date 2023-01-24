@@ -13,6 +13,7 @@ if unable to import cloud - (check log of vault and agent manager (if sealed tha
 database classification report - dlp api ,class submit
 visiblity - kiali,ui
 policy engine - policy engine
+getmsecpolicycount - dlp-info (check dlp-info svc)
 
 
 jenkins error check
